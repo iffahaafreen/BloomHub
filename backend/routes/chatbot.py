@@ -1,6 +1,10 @@
 import requests
 from flask import Blueprint, request, jsonify
+from flask_cors import CORS
 import os
+
+chatbot_bp = Blueprint('chatbot', __name__)
+CORS(chatbot_bp, origins=["https://bloom-hub-five.vercel.app"])
 
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
@@ -10,8 +14,11 @@ chatbot_bp = Blueprint('chatbot', __name__)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
 
-@chatbot_bp.route('/chat', methods=['POST'])
+@chatbot_bp.route('/chat', methods=['POST', 'OPTIONS])
 def chat():
+    if request.method == 'OPTIONS':
+        return '', 204
+
     if not request.is_json:
         return jsonify({"error": "Request must be JSON"}), 415
 
