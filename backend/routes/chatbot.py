@@ -1,6 +1,10 @@
 import requests
 from flask import Blueprint, request, jsonify
-from config import GEMINI_API_KEY
+import os
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY environment variable not set")
 
 chatbot_bp = Blueprint('chatbot', __name__)
 
@@ -17,7 +21,6 @@ def chat():
     if not user_message:
         return jsonify({"error": "No message provided"}), 400
 
-    # Correct JSON payload format for Gemini API
     payload = {
         "contents": [
             {
@@ -30,11 +33,14 @@ def chat():
         ]
     }
 
-    response = requests.post(
-        GEMINI_URL,
-        json=payload,
-        params={"key": GEMINI_API_KEY}
-    )
+    try:
+        response = requests.post(
+            GEMINI_URL,
+            json=payload,
+            params={"key": GEMINI_API_KEY}
+        )
+        response.raise_for_status()
+    except requests.RequestException as e:
+        return jsonify({"error": "Request to Gemini API failed", "details": str(e)}), 500
 
     return jsonify(response.json())
-
