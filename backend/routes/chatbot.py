@@ -24,20 +24,28 @@ def chat():
     payload = {
         "contents": [
             {
-                "parts": [
-                    {
-                        "text": user_message
-                    }
-                ]
+                "parts": [{"text": user_message}]
             }
-        ]
+        ],
+        "generationConfig": {
+            "temperature": 0.7,
+            "maxOutputTokens": 256,
+            "topP": 0.8
+        }
+    }
+
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
     }
 
     try:
         response = requests.post(
             GEMINI_URL,
             json=payload,
-            params={"key": GEMINI_API_KEY}
+            params={"key": GEMINI_API_KEY},
+            headers=headers,
+            timeout=30  # optional, set a timeout
         )
         response.raise_for_status()
     except requests.RequestException as e:
