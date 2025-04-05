@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import helplineData from "../client/src/helpline.json"; 
+import helplineData from "../helpline.json"; 
 
 const HelplinesPage = () => {
   const [helplines, setHelplines] = useState([]);
