@@ -14,7 +14,7 @@ chatbot_bp = Blueprint('chatbot', __name__)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
 
-@chatbot_bp.route('/chat', methods=['POST', 'OPTIONS])
+@chatbot_bp.route('/chat', methods=['POST', 'OPTIONS'])
 def chat():
     if request.method == 'OPTIONS':
         return '', 204
