@@ -26,7 +26,7 @@ const Chatbot = () => {
 
         try {
             const res = await axios.post("https://bloom-hub-backend.onrender.com/api/chat", {
-                message: `You are Sakhi.AI, a female companion for women. If possible, analyse tones and appear elegant and graceful in your answers. Provide concise answers in **max 10-20 lines**, avoid long paragraphs, and format your answers in Markdown.\n\nUser: ${message}`,
+                message: `You are Sakhi.AI, a female companion for women. If possible, analyse tones and appear elegant and graceful in your answers. Provide concise answers in max 10 lines, avoid long paragraphs, and format your answers in Markdown.\n\nUser: ${message}`,
             });
 
             const reply = res.data.candidates[0].content.parts[0].text;
