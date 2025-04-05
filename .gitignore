@@ -1,0 +1,46 @@
+# -----------------------------
+# 🌐 GLOBAL IGNORE
+# -----------------------------
+# Virtual environment
+venv/
+__pycache__/
+*.py[cod]
+
+# Logs, temp, system files
+*.log
+*.swp
+.DS_Store
+Thumbs.db
+
+# SQLite DB files (optional)
+*.sqlite3
+
+# Environment/config secrets
+.env
+.env.*
+config.py
+instance/
+
+# VS Code settings (optional)
+.vscode/
+
+# -----------------------------
+# 🖥️/client IGNORE
+# -----------------------------
+/client/node_modules/
+/client/.pnp
+/client/.pnp.js
+/client/coverage/
+/client/build/
+
+#/client environment variables
+/client/.env
+/client/.env.local
+/client/.env.development.local
+/client/.env.test.local
+/client/.env.production.local
+
+# NPM/Yarn logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
